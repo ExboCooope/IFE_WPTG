@@ -53,6 +53,13 @@
         ife.item_playreplay.selectable=1;
     }
 
+    HTMLElement.prototype.setStatic=function(){
+        this.addEventListener("selectstart",HTMLElement.preventSelectFunction,true);
+        this.addEventListener("dragstart",HTMLElement.preventSelectFunction,true);
+        this.style.cursor="default";
+    };
+    document.body.setStatic();
+
 </script>
 
 </body>

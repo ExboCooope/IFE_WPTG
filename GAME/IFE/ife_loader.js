@@ -13,6 +13,7 @@ ife_loader.init=function(){
     if(!this.loaded){
         //初始化环境
         this.loaded=1;
+        //stg_refresher_type=1;
         stgLoadKeyMap();//初始化按键表
         bullet00Assignment();//初始化子弹文理绑定
         //载入音效
@@ -31,7 +32,7 @@ ife_loader.init=function(){
         stg_frame_w=480;
         stg_frame_h=550;
 
-        stg_refresher_type=0;
+        //stg_refresher_type=0;
         var p=stgLoadData("render_type");
         //p=1;
         stgCreateCanvas("frame",stg_frame_w,stg_frame_h,p?stg_const.TEX_CANVAS2D:stg_const.TEX_CANVAS3D);

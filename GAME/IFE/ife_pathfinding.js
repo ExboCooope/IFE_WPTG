@@ -168,7 +168,7 @@ function ifeNodeConnectCheck(node1,node2,p){
 
 ife.draw_link_controller={
     init:function(){
-        this.drawlink=1;
+       // this.drawlink=1;
         this.render=new StgRender("testShader2");
         this.layer=81;
         this.render.type=4;

@@ -38,6 +38,8 @@ var stg_local_player_pos=0;
 var stg_player_templates={};
 var stg_level_templates={};
 
+var stg_enemy=[];
+
 //是否在播放replay
 var stg_in_replay=0;
 

@@ -14,7 +14,7 @@ function loadItemSystem(){
 
 
 
-
+stgCreateImageTexture("fairy_red", "res/fairy_red.png");
 
 
 function EnemyFairyHolder(base,tx,ty,tw,th){

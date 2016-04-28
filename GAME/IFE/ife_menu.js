@@ -7,6 +7,7 @@ function ifeGenerateMenu(){
 
     that.main_menu=new MenuHolderA1([100,100],[0,50],ife_loader);
     that.setting=new MenuHolderA1([100,100],[0,50],that.main_menu);
+    that.game_select_menu=new MenuHolderA1([100,100],[0,50],that.main_menu);
 
     that.item_start=new TextMenuItem("开始游戏",1,1,null,1);
     that.item_benchmark=new TextMenuItem("性能测试",1,1,null,1);
@@ -15,6 +16,20 @@ function ifeGenerateMenu(){
     that.item_playreplay=new TextMenuItem("回放",1,0,null,1);
     that.item_savereplay=new TextMenuItem("保存回放",1,0,null,0);
 
+    for(var i in stg_level_templates){
+        if(stg_level_templates.hasOwnProperty(i)) {
+            (function () {
+                var j = i;
+                that["item_level_" + i] = new TextMenuItem(i, 1, 1, {init: function () {
+                    ife.startGame(j,"siki");
+                }}, 1);
+                that.game_select_menu.pushItem(that["item_level_" + i]);
+            })();
+        }
+    }
+    that.game_select_back=new TextMenuItem("返回",1,1,that.main_menu,1);
+    that.game_select_menu.pushItem(that.game_select_back);
+
     that.main_menu.pushItems(that.item_start,that.item_benchmark,that.item_settings,that.item_help,that.item_playreplay,that.item_savereplay);
     that.main_menu.setColor("#88F","#880");
 
@@ -22,9 +37,10 @@ function ifeGenerateMenu(){
         init:function(){ife.startGame("ife_pressure_test","siki");}
     };
 
-    that.item_start.on_select={
-        init:function(){ife.startGame("ife_stage_1","siki");}
-    };
+   // that.item_start.on_select={
+   //     init:function(){ife.startGame("ife_stage_1","siki");}
+   // };
+    that.item_start.on_select=that.game_select_menu;
 
     that.item_playreplay.on_select={
         init:function(){replayStartLevel(0);}

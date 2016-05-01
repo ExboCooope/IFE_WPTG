@@ -158,8 +158,9 @@ var ifeSpriteShader={
                                 var obj = pool[l][tn][i];
                                 c.globalAlpha=obj.alpha;
                                 c.setTransform(sx, 0, 0, sy, obj.cx*sx, obj.cy*sy);
+
                                 c.rotate(obj.r);
-                                c.drawImage(tex, obj.uvt[0], obj.uvt[1], obj.uvt[2], obj.uvt[3], obj.cmx, obj.cmy, obj.uvt[2], obj.uvt[3]);
+                                c.drawImage(tex, obj.uvt[0], obj.uvt[1], obj.uvt[2], obj.uvt[3], obj.cmx*obj.scale[0], obj.cmy*obj.scale[1], obj.uvt[2]*obj.scale[0], obj.uvt[3]*obj.scale[1]);
                             }
                         }
                     }

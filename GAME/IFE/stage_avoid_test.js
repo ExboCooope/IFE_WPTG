@@ -49,7 +49,7 @@ var stage_avoid_test={
                 stgAddObject(stage_avoid_showres);
             }
         }else if(stg_common_data.phasefinish==3){
-            stg_common_data.rank-=5;
+            //stg_common_data.rank-=5;
             if(stg_common_data.rank<0)stg_common_data.rank=0;
             stg_common_data.phasefinish=0;
             this.cid++;

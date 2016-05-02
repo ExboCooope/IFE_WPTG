@@ -7,7 +7,11 @@ var stage_avoid_test={
         stg_common_data.rank=stg_common_data.rank||16;
         stg_common_data.rank+=5;
         stg_common_data.phases=stg_common_data.phases||[0,1,2,3,4,5,6,7,8,9];
+        //stg_common_data.phases=[7];
         stg_common_data.phasefinish=3;
+        stg_common_data.countfps=0;
+        stg_common_data.countfpsn=0;
+        stg_common_data.version="beta 2";
         stgClearCanvas("ui");
         //stg_procedures.drawFrame.background="#222";
         this.cid=-1;
@@ -63,6 +67,9 @@ var stage_avoid_test={
 
             }
             stgClearCanvas("ui");
+        }else{
+            stg_common_data.countfps+=stg_fps;
+            stg_common_data.countfpsn++;
         }
     }
 };
@@ -162,7 +169,7 @@ var stage_avoid_finalshowres={
     init:function(){
         this.f=0;
         var ay = new RenderText(30, 80);
-        ay.render.text ="结果发布：";
+        ay.render.text ="结果发布："+"版本 "+stg_common_data.version;
         ay.render.color="#FFF";
         ay.base={target:this,auto_remove:1};
         var q=0;
@@ -183,7 +190,11 @@ var stage_avoid_finalshowres={
             }
         }
 
-
+        var ay = new RenderText(30, 110+i*20);
+        ay.render.text ="平均FPS："+(stg_common_data.countfps/stg_common_data.countfpsn>>0);
+        ay.render.color="#FFF";
+        ay.base={target:this,auto_remove:1};
+        i++;
         var ay = new RenderText(30, 110+i*20);
         ay.render.text ="平均分："+q+"  "+eu[1];
         ay.render.color="#FFF";
@@ -441,26 +452,27 @@ stage_avoid_dammaku[7]={
         this.f++;
         var r=stg_common_data.rank;
         var vm = (r/5)+1;
-        if(this.f>=1000/(r+20)) {
+        if(this.f>=800/(r+10)) {
             this.f=0;
-            var a =stg_rand(PI2);
-            var rr=200-r;
-            var x=rr*cos(a)+stg_local_player.pos[0];
-            var y=rr*sin(a)+stg_local_player.pos[1];
-            if(x<0)x=0;
-            if(x>stg_frame_w)x=stg_frame_w;
-            if(y<0)y=0;
-            if(y>stg_frame_h)y=stg_frame_h;
-            a=atan2(stg_local_player.pos[1]-y,stg_local_player.pos[0]-x)/PI180;
+            for(var cnt=0;cnt<2;cnt++) {
+                var a = stg_rand(PI2);
+                var rr = 200 - r;
+                var x = rr * cos(a) + stg_local_player.pos[0];
+                var y = rr * sin(a) + stg_local_player.pos[1];
+                if (x < 0)x = 0;
+                if (x > stg_frame_w)x = stg_frame_w;
+                if (y < 0)y = 0;
+                if (y > stg_frame_h)y = stg_frame_h;
+                a = atan2(stg_local_player.pos[1] - y, stg_local_player.pos[0] - x) / PI180;
 
-            // var n = (r*3 + 10)>>0;
-           // var n = (r*3 + 10)>>0;
-            var vm = 1+r/20;
-            var nn=5;
-            //var vm=1.7;
-            var rd=stg_rand(14)>>0;
-            var blt = stgCreateShotW2(x, y, vm, a, "sZYD", 0, 1 + rd, 3, vm+1, 0, 0);
-
+                // var n = (r*3 + 10)>>0;
+                // var n = (r*3 + 10)>>0;
+                var vm = 1 + r / 20;
+                var nn = 5;
+                //var vm=1.7;
+                var rd = stg_rand(14) >> 0;
+                var blt = stgCreateShotW2(x, y, vm, a, "sZYD", 0, 1 + rd, 3, vm + 1, 0, 0);
+            }
             //stgCreateShotW2(this.pos[0], this.pos[1], vm, a, "sXY", 0, 15, n, vm, 360,0);
         }
         //stgCreateShotA1(stg_rand(0,stg_frame_w),5,stg_rand(1,vm),90,"sMD",0,15);

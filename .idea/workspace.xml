@@ -45,11 +45,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="stage_avoid_test.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="stage_avoid_test.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GAME/IFE/stage_avoid_test.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.3403909" vertical-offset="0" max-vertical-offset="10887">
-                  <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="10887">
+                  <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
                   <folding />
                 </state>
               </provider>
@@ -65,11 +65,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ife_menu.js" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="ife_menu.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/GAME/IFE/ife_menu.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="5054">
-                  <caret line="103" column="68" selection-start-line="103" selection-start-column="68" selection-end-line="103" selection-end-column="68" />
+                <state vertical-scroll-proportion="0.6807818" vertical-offset="1710" max-vertical-offset="5054">
+                  <caret line="112" column="24" selection-start-line="112" selection-start-column="24" selection-end-line="112" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
@@ -269,9 +269,9 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/STGBULLET.js" />
         <option value="$PROJECT_DIR$/GAME/default_player_script.js" />
-        <option value="$PROJECT_DIR$/GAME/IFE/ife_menu.js" />
         <option value="$PROJECT_DIR$/GAME/IFE/ife_loader.js" />
         <option value="$PROJECT_DIR$/GAME/IFE/stage_avoid_test.js" />
+        <option value="$PROJECT_DIR$/GAME/IFE/ife_menu.js" />
       </list>
     </option>
   </component>
@@ -280,8 +280,8 @@
     <config-path />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="484" />
-    <option name="y" value="420" />
+    <option name="x" value="307" />
+    <option name="y" value="66" />
     <option name="width" value="1940" />
     <option name="height" value="1050" />
   </component>
@@ -504,7 +504,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="484" y="420" width="1940" height="1050" extended-state="0" />
+    <frame x="307" y="66" width="1940" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -872,14 +872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GAME/IFE/ife_menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="5054">
-          <caret line="103" column="68" selection-start-line="103" selection-start-column="68" selection-end-line="103" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GAME/IFE/ife_loader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1761" max-vertical-offset="2489">
@@ -900,8 +892,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GAME/IFE/stage_avoid_test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3403909" vertical-offset="0" max-vertical-offset="10887">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="10887">
+          <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GAME/IFE/ife_menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6807818" vertical-offset="1710" max-vertical-offset="5054">
+          <caret line="112" column="24" selection-start-line="112" selection-start-column="24" selection-end-line="112" selection-end-column="24" />
           <folding />
         </state>
       </provider>

@@ -102,7 +102,7 @@ function ifeGenerateMenu(){
             that.helpcontext.push(new RenderText(100,180,"Z 射击/确认"));
             that.helpcontext.push(new RenderText(100,200,"X 切换Link显示/取消/返回上一级菜单"));
             that.helpcontext.push(new RenderText(100,220,"ESC 暂停"));
-            that.helpcontext.push(new RenderText(100,220,"标题界面按R可以重置按键"));
+            that.helpcontext.push(new RenderText(100,240,"标题界面按R可以重置按键"));
             var q=new ButtonHolder("返回",1,1,
                 {init:function(){
                     for(var i=0;i<that.helpcontext.length;i++){
@@ -111,7 +111,7 @@ function ifeGenerateMenu(){
                     stgAddObject(that.main_menu);
                     stgDeleteObject(that.item_help.on_select);
                 }},0,1);
-            q.pos=[100,260];
+            q.pos=[100,280];
             stgAddObject(q);
             that.helpcontext.push(q);
 

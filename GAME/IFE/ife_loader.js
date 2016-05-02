@@ -105,11 +105,21 @@ ife_loader.init=function(){
         ife.main_menu.setColor("#88F","#880");
     }
     stgClearCanvas("ui");
-    stgDeleteSelf();
+    //stgDeleteSelf();
 };
-
+ife_loader.script=function(){
+    if(ife.main_menu.active) {
+        var t = checkKeyChange();
+        if (t.length) {
+            if (t[0] == 82) {
+                stgResetKeyMap();
+            }
+        }
+    }
+};
 
 
 ife.startGame=function(level,player){
     stgStartLevel(level,[player],{});
 };
+

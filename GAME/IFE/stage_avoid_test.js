@@ -9,7 +9,7 @@ var stage_avoid_test={
         stg_common_data.phases=stg_common_data.phases||[0,1,2,3,4,5,6,7,8,9];
         stg_common_data.phasefinish=3;
         stgClearCanvas("ui");
-        stg_procedures.drawFrame.background="#222";
+        //stg_procedures.drawFrame.background="#222";
         this.cid=-1;
 
         stg_common_data.resultRank=[];
@@ -62,6 +62,7 @@ var stage_avoid_test={
                     stgAddObject(stage_avoid);
 
             }
+            stgClearCanvas("ui");
         }
     }
 };
@@ -228,6 +229,7 @@ stage_avoid_dammaku[0]={
             var n = (r / 2 + 1)>>0;
             var vm = r / 5;
             var np = (1 + r)>>0;
+            var vn=1-(r/60);
             for (var q = (-np/4)>>0; q < (np/4); q++) {
                 var aa = 360 / np * q;
                 stgCreateShotW1(this.pos[0], this.pos[1], 1, a + aa, "sMD", 0, 15, r / 2 + 1, vm / (n - 1), 0, 0);

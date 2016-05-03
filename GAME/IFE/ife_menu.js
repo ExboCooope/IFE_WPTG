@@ -8,6 +8,7 @@ function ifeGenerateMenu(){
     that.main_menu=new MenuHolderA1([100,100],[0,50],ife_loader);
     that.setting=new MenuHolderA1([100,100],[0,50],that.main_menu);
     that.game_select_menu=new MenuHolderA1([100,100],[0,50],that.main_menu);
+    that.avoid_menu=new MenuHolderA1([100,100],[0,25],that.main_menu);
 
     that.item_start=new TextMenuItem("选择关卡",1,1,null,1);
     that.item_avoid=new TextMenuItem("弹幕回避能力测试",1,1,null,1);
@@ -40,9 +41,10 @@ function ifeGenerateMenu(){
     that.item_benchmark.on_select={
         init:function(){ife.startGame("ife_pressure_test","siki");}
     };
-    that.item_avoid.on_select={
-        init:function(){ife.startGame("stg_avoid_test","siki");}
-    };
+   // that.item_avoid.on_select={
+   //     init:function(){ife.startGame("stg_avoid_test","siki");}
+    //};
+    that.item_avoid.on_select=that.avoid_menu;
    // that.item_start.on_select={
    //     init:function(){ife.startGame("ife_stage_1","siki");}
    // };
@@ -90,8 +92,59 @@ function ifeGenerateMenu(){
     that.setting.pushItems( that.setting_vsync, that.setting_wgl,that.setting_rs,that.setting_return);
     that.setting.setColor("#88F","#880");
 
+    that.avoid_menu_item=[];
+    that.avoid_levels=[];
+    that.avoid_menu_start=new TextMenuItem("开始测试",1,1,null,0);
+    that.avoid_menu_start.on_select={
+        init:function(){
+            var c={phases:[]};
+            for(var j=0;j<avoidname.length;j++){
+                if(that.avoid_levels[j]){
+                    c.phases.push(j)
+                }
+            }
+            if(c.phases.length==0){
+                stgDeleteSelf();
+            }else{
+                ife.startGame("stg_avoid_test","siki",c);
+            }
+        }
+    };
+    that.avoid_menu.pushItem(that.avoid_menu_start);
 
+    for(i=0;i<avoidname.length;i++){
 
+        that.avoid_menu_item[i]=new TextMenuItem("  "+avoidname[i],1,1,{i:i,init:function(){
+            that.avoid_levels[this.i]=!that.avoid_levels[this.i];
+            that.avoid_refresh();
+            stgDeleteSelf();
+        }},0);
+        that.avoid_menu.pushItem(that.avoid_menu_item[i]);
+
+    }
+    that.avoid_menu.pushItem(new TextMenuItem("全选",1,1,{init:function(){
+        for(var i=0;i<avoidname.length;i++) {
+            that.avoid_levels[this.i] = true;
+        }
+        stgDeleteSelf();
+        that.avoid_refresh();
+    }},0));
+    that.avoid_rank=new TextMenuItem("初始Rank",1,1,{init:function(){
+        that.avoid_rank.r=(that.avoid_rank.r+4)%25;
+        stgDeleteSelf();
+        that.avoid_refresh();
+    }},0);
+    that.avoid_rank.r=16;
+
+    that.avoid_menu.pushItem();
+    that.avoid_menu.pushItem(new TextMenuItem("返回",1,1,that.main_menu,1));
+    that.avoid_refresh=function(){
+        for(var j=0;j<avoidname.length;j++){
+            that.avoid_menu_item[j].mtext="  "+avoidname[j]+" "+(that.avoid_levels[j]?"√":"×");
+        }
+        that.avoid_rank.mtext="初始Rank "+that.avoid_rank.r;
+    };
+    that.avoid_refresh();
     that.item_help.on_select={
         init:function(){
             that.helpcontext=[];
@@ -127,6 +180,8 @@ function ifeGenerateMenu(){
         }
 
     }
+
+
 
 
 }

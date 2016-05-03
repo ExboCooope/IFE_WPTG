@@ -27,12 +27,31 @@ function stgCreateShotA2(x,y,speed,angle,bulletname,delay,color,acc,maxspeed){
     return a;
 }
 
+stgCreateShotW1.stop=false;
+
+function stgStopWShot(){
+    stgCreateShotW1.stop=true;
+    stgAddObject({
+        script:function(){
+            if(!this.a){
+                this.a=1;
+            }else{
+                stgCreateShotW1.stop=false;
+            }
+        }
+    })
+}
+
 function stgCreateShotW1(x,y,speed,angle,bulletname,delay,color,n,speed_add,angle_add,delay_add){
     var blt=[];
     var time=0;
     var ShowW1Controller={
         f:0,
         script:function(){
+            if(stgCreateShotW1.stop){
+                stgDeleteSelf();
+                return;
+            }
             while(this.f>=time) {
                 blt.push(stgCreateShotA1(x,y,speed,angle,bulletname,delay,color));
                 speed+=speed_add;
@@ -72,6 +91,10 @@ function stgCreateShotW2(x,y,speed,angle_center,bulletname,delay,color,n,speed_m
     var ShowW1Controller={
         f:0,
         script:function(){
+            if(stgCreateShotW1.stop){
+                stgDeleteSelf();
+                return;
+            }
             while(this.f>=time) {
                 blt.push(stgCreateShotA1(x,y,speed,angle,bulletname,delay,color));
                 speed+=speed_add;

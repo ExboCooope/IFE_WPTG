@@ -5,13 +5,13 @@ stgCreateImageTexture("card_bg","cardbg2_d.png");
 var stage_avoid_test={
     init:function(){
         stg_common_data.rank=stg_common_data.rank||16;
-        stg_common_data.rank+=5;
+        //stg_common_data.rank+=5;
         stg_common_data.phases=stg_common_data.phases||[0,1,2,3,4,5,6,7,8,9];
         //stg_common_data.phases=[7];
         stg_common_data.phasefinish=3;
         stg_common_data.countfps=0;
         stg_common_data.countfpsn=0;
-        stg_common_data.version="beta 2";
+        stg_common_data.version="beta 3";
         stgClearCanvas("ui");
         //stg_procedures.drawFrame.background="#222";
         this.cid=-1;
@@ -45,6 +45,7 @@ var stage_avoid_test={
                     stgDeleteObject(_pool[i]);
                 }
             }
+            stgStopWShot();
             //发表结果
             stg_common_data.phasefinish=2;
             if(this.cid==stg_common_data.phases.length-1){
@@ -88,8 +89,8 @@ var avoidname=["自机狙1","自机狙2","固定弹","随机弹(正面)","螺旋
 var stage_avoid={
     init:function(){
         stg_common_data.test_name=avoidname[stg_common_data.cphase];
-        stg_common_data.deathRecoverTime=1200;
-        stg_common_data.life=5;
+        stg_common_data.deathRecoverTime=900;
+        stg_common_data.life=6;
         stg_common_data.rankKeepTime=[];
         stg_common_data.rebirthTime=240;
         stgAddObject(stage_avoid_dammaku[stg_common_data.cphase]);
@@ -133,8 +134,10 @@ var stage_avoid={
                 if(stg_common_data.deathRecoverTime<=0){
                     this.stopFunction();
                 }
+                stg_common_data.rank+=0.006;
             }
             stg_common_data.rank+=0.003;
+
             for(var i=0;i<stg_common_data.rank;i++){
                 stg_common_data.rankKeepTime[i]=(stg_common_data.rankKeepTime[i]||0)+1;
             }
@@ -214,13 +217,15 @@ var stage_avoid_finalshowres={
 
 var avoid_rank_disc=[
     [0,"纸(E-)","你TM在逗我"],
-    [3,"并(E+)","似乎并不熟悉STG"],
-    [8,"强(N)","可以冲击Normal难度"],
-    [15,"凶(H)","拥有一定的回避能力"],
-    [20,"狂(L)","恭喜STG已经入门"],
-    [25,"准神(L+)","L难度的neta估计已如家常便饭"],
-    [33,"神(LNN)","努努力应该可以打出来（雾）"],
-    [40,"论外(Unkown)","你确定没有作死么"]
+    [8,"并(E+)","似乎并不熟悉STG"],
+    [12,"强(N)","可以冲击Normal难度"],
+    [17,"凶(H)","拥有一定的回避能力"],
+    [21,"狂下(L)","恭喜STG已经入门"],
+    [23,"狂中(L)","恭喜STG已经入门"],
+    [25,"狂上(L)","恭喜STG已经入门"],
+    [27,"准神(L+)","L难度的neta估计已如家常便饭"],
+    [32,"神(LNN)","努努力应该可以打出来（雾）"],
+    [38,"论外(Unkown)","你确定没有作死么"]
 ];
 
 var stage_avoid_dammaku=[];

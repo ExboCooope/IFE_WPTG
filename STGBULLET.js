@@ -35,8 +35,12 @@ function stgStopWShot(){
         script:function(){
             if(!this.a){
                 this.a=1;
+            }else if(this.a==1){
+                this.a=2;
+
             }else{
                 stgCreateShotW1.stop=false;
+                stgDeleteSelf();
             }
         }
     })

@@ -136,7 +136,7 @@ function ifeGenerateMenu(){
     }},0);
     that.avoid_rank.r=16;
 
-    that.avoid_menu.pushItem();
+    that.avoid_menu.pushItem(that.avoid_rank);
     that.avoid_menu.pushItem(new TextMenuItem("返回",1,1,that.main_menu,1));
     that.avoid_refresh=function(){
         for(var j=0;j<avoidname.length;j++){

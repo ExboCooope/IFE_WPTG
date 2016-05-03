@@ -124,13 +124,13 @@ function ifeGenerateMenu(){
     }
     that.avoid_menu.pushItem(new TextMenuItem("全选",1,1,{init:function(){
         for(var i=0;i<avoidname.length;i++) {
-            that.avoid_levels[this.i] = true;
+            that.avoid_levels[i] = true;
         }
         stgDeleteSelf();
         that.avoid_refresh();
     }},0));
     that.avoid_rank=new TextMenuItem("初始Rank",1,1,{init:function(){
-        that.avoid_rank.r=(that.avoid_rank.r+4)%25;
+        that.avoid_rank.r=(that.avoid_rank.r+4)%24;
         stgDeleteSelf();
         that.avoid_refresh();
     }},0);

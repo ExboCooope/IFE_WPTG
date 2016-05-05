@@ -110,6 +110,7 @@ ife_loader.init=function(){
     }
     stgClearCanvas("ui");
     //stgDeleteSelf();
+    ife.avoid_refresh();
 };
 ife_loader.script=function(){
     if(ife.main_menu.active) {

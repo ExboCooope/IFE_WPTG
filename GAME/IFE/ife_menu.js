@@ -129,6 +129,9 @@ function ifeGenerateMenu(){
         stgDeleteSelf();
         that.avoid_refresh();
     }},0));
+    that.avoid_history=new TextMenuItem("历史成绩",1,1,{init:function(){
+        stgDeleteSelf();
+    }},0);
     that.avoid_rank=new TextMenuItem("初始Rank",1,1,{init:function(){
         that.avoid_rank.r=(that.avoid_rank.r+4)%24;
         stgDeleteSelf();
@@ -137,11 +140,35 @@ function ifeGenerateMenu(){
     that.avoid_rank.r=16;
 
     that.avoid_menu.pushItem(that.avoid_rank);
+    that.avoid_menu.pushItem(that.avoid_history);
     that.avoid_menu.pushItem(new TextMenuItem("返回",1,1,that.main_menu,1));
     that.avoid_refresh=function(){
+        var  his = stgLoadData("avoid_history");
+        var q=0;
+        var a=0;
         for(var j=0;j<avoidname.length;j++){
             that.avoid_menu_item[j].mtext="  "+avoidname[j]+" "+(that.avoid_levels[j]?"√":"×");
+            if(his){
+                that.avoid_menu_item[j].mtext+=his.scores[j]?" "+his.scores[j]:"";
+                q+=his.scores[j]||0;
+                a+=his.trail[j]?1:0;
+            }
+
         }
+
+        q=q/a;
+        var eu=avoid_rank_disc[0];
+        for(var j=0;j<avoid_rank_disc.length;j++){
+            if(q>avoid_rank_disc[j][0]){
+                eu=avoid_rank_disc[j];
+            }
+        }
+        if(a){
+            that.avoid_history.mtext="历史成绩 "+Math.floor(q*10)/10+" "+eu[1];
+        }else{
+            that.avoid_history.mtext="还没有历史成绩哦~";
+        }
+
         that.avoid_rank.mtext="初始Rank "+that.avoid_rank.r;
     };
     that.avoid_refresh();

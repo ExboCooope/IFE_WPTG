@@ -171,6 +171,13 @@ var stage_avoid_showres={
 var stage_avoid_finalshowres={
     init:function(){
         this.f=0;
+
+        var  his = stgLoadData("avoid_history");
+        if (!his || his.version!=stg_common_data.version) his = {version:stg_common_data.version,scores:[],trail:[]};
+
+
+
+
         var ay = new RenderText(30, 80);
         ay.render.text ="结果发布："+"版本 "+stg_common_data.version;
         ay.render.color="#FFF";
@@ -180,6 +187,15 @@ var stage_avoid_finalshowres={
             var j=stg_common_data.phases[i];
             var ay = new RenderText(50, 100+i*20);
             ay.render.text =avoidname[j]+ "：" +stg_common_data.resultRank[j] + "";
+            if(!stg_in_replay) {
+                if(stg_common_data.resultRank[j]>(his.scores[j]||0)){
+                    his.scores[j]=stg_common_data.resultRank[j];
+                    ay.render.text+=" 新高分！";
+                }
+                his.trail[j]=(his.trail[j]||0)+1;
+            }
+
+
             ay.render.color="#FFF";
             ay.base={target:this,auto_remove:1};
             q=q+stg_common_data.resultRank[j];
@@ -191,6 +207,10 @@ var stage_avoid_finalshowres={
             if(q>avoid_rank_disc[j][0]){
                 eu=avoid_rank_disc[j];
             }
+        }
+
+        if(!stg_in_replay){
+            stgSaveData("avoid_history",his);
         }
 
         var ay = new RenderText(30, 110+i*20);

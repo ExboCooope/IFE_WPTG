@@ -51,7 +51,8 @@
     q.onchange=function(){
         upload(this.files[0]);
         ife.item_playreplay.selectable=1;
-    }
+        ife.main_menu.setColor("#88F","#880");
+    };
 
     HTMLElement.prototype.setStatic=function(){
         this.addEventListener("selectstart",HTMLElement.preventSelectFunction,true);

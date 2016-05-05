@@ -56,7 +56,10 @@ function ifeGenerateMenu(){
 
     that.item_savereplay.on_select={
         init:function(){
-            downloadFile("test.rpy",packReplay());
+            var a=new Date();
+            var b= _replay_common_data[0].data[0]+""+ a.toJSON();
+            that.item_savereplay.selectable=false;
+            downloadFile(b+".rpy",packReplay());
             stgDeleteSelf();
         }
     };

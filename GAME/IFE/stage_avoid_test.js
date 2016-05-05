@@ -305,19 +305,29 @@ stage_avoid_dammaku[2]={
         this.pos=[0,0,0];
         this.pos[0] = stg_frame_w / 2;
         this.pos[1] = 50;
+        this.i=0;
+        this.cl=0;
     },
     script:function(){
         this.f++;
         var r=stg_common_data.rank;
         if(this.f>=800/(r+20)) {
+            this.i++;
             this.f=0;
             var a =stg_rand(360);
            // var n = (r*3 + 10)>>0;
             var n = (r*5 + 10)>>0;
             var cl=stg_rand(0,15)>>0;
+            if(this.i%4==0){
+                if(cl==this.cl){
+                    this.cl=(this.cl+1)%16;
+                }else{
+                    this.cl=cl;
+                }
+            }
            // var vm = (r/6)+1;
             var vm=1.7;
-            stgCreateShotW2(this.pos[0], this.pos[1], vm, a, "sXY", 0, cl, n, vm, 360,0);
+            stgCreateShotW2(this.pos[0], this.pos[1], vm, a, "sXY", 0, this.cl, n, vm, 360,0);
         }
     }
 };

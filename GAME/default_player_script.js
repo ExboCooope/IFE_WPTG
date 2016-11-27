@@ -7,6 +7,8 @@ function Default_Player_Sikieiki(iPosition){
 }
 stgCreateImageTexture("siki_body","res/pl00.png");
 stgCreateImageTexture("pl_effect","etama2.png");
+//document.body.appendChild(stg_textures["siki_body"]);
+
 Default_Player_Sikieiki.prototype.init=function(){
     this.side=stg_const.SIDE_PLAYER;
     //stgCreateImageTexture("siki_body","res/pl00.png");

@@ -53,7 +53,7 @@ var webgl_canvas;
 function webglCreateFromCanvas(canvas){
 
     var gl;
-    var arg={preserveDrawingBuffer:true};
+    var arg={preserveDrawingBuffer:true, premultipliedAlpha: true};
     gl=canvas.getContext("webgl",arg)||canvas.getContext("experimental-webgl",arg);
     if(!gl){
         console.log("Cannot Create Webgl Context.");
@@ -61,6 +61,7 @@ function webglCreateFromCanvas(canvas){
         stgSaveData("render_type",1);
     }
     _gl=gl;
+    //gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);
     webgl_canvas=canvas;
     stg_const.TRIANGLES=gl.TRIANGLES;
     stg_const.TRIANGLE_FAN=gl.TRIANGLE_FAN;

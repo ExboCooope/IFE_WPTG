@@ -27,12 +27,35 @@ function stgCreateShotA2(x,y,speed,angle,bulletname,delay,color,acc,maxspeed){
     return a;
 }
 
+stgCreateShotW1.stop=false;
+
+function stgStopWShot(){
+    stgCreateShotW1.stop=true;
+    stgAddObject({
+        script:function(){
+            if(!this.a){
+                this.a=1;
+            }else if(this.a==1){
+                this.a=2;
+
+            }else{
+                stgCreateShotW1.stop=false;
+                stgDeleteSelf();
+            }
+        }
+    })
+}
+
 function stgCreateShotW1(x,y,speed,angle,bulletname,delay,color,n,speed_add,angle_add,delay_add){
     var blt=[];
     var time=0;
     var ShowW1Controller={
         f:0,
         script:function(){
+            if(stgCreateShotW1.stop){
+                stgDeleteSelf();
+                return;
+            }
             while(this.f>=time) {
                 blt.push(stgCreateShotA1(x,y,speed,angle,bulletname,delay,color));
                 speed+=speed_add;
@@ -56,6 +79,52 @@ function stgCreateShotW1(x,y,speed,angle,bulletname,delay,color,n,speed_add,angl
     return blt;
 }
 
+
+function stgCreateShotW2(x,y,speed,angle_center,bulletname,delay,color,n,speed_max,angle_spread,delay_total){
+    var blt=[];
+    var time=0;
+    var angle_add=angle_spread/(n-1);
+    var angle=angle_center-(angle_spread)/2;
+    var speed_add=(speed_max-speed)/(n-1);
+    var delay_add=delay_total/(n-1);
+    if(n<=1){
+        angle_add=0;angle=angle_center;
+        speed_add=0;
+        delay_add=0;
+    }
+    var ShowW1Controller={
+        f:0,
+        script:function(){
+            if(stgCreateShotW1.stop){
+                stgDeleteSelf();
+                return;
+            }
+            while(this.f>=time) {
+                blt.push(stgCreateShotA1(x,y,speed,angle,bulletname,delay,color));
+                speed+=speed_add;
+                angle+=angle_add;
+                time+=delay_add;
+                n--;
+                if(n<=0){
+                    if(delay_add)stgDeleteSelf();
+                    return;
+                }
+            }
+            this.f++;
+        }
+    }
+
+    if(delay_add==0){
+        ShowW1Controller.script();
+    }else{
+        stgAddObject(ShowW1Controller);
+    }
+    return blt;
+}
+
+function stgCreateShotR1(x,y,speed,angle,bulletname,delay,color,range,angle_add){
+    return stgCreateShotA1(x+range*cos(angle*PI180),y+range*sin(angle*PI180),speed,angle+angle_add,bulletname,delay,color);
+}
 
 function StgBullet(){
     this.type=stg_const.OBJ_BULLET;

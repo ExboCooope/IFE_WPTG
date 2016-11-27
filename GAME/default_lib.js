@@ -47,8 +47,10 @@ ButtonHolder.prototype.script=function(){
 };
 
 
-function TextMenuItem(sText,iShow,iSelectable,oOnSelect,iSelectRemove){
+function TextMenuItem(sText,iShow,iSelectable,oOnSelect,iSelectRemove,bEventType){
     this.mtext=sText;
+    if(bEventType===undefined)bEventType=1;
+    this.event_type=bEventType;
     this.selectable=iSelectable;
     this.on_select=oOnSelect;
     this.select_remove=iSelectRemove;
@@ -72,11 +74,12 @@ TextMenuItem.prototype.script=function(){
     var y=this.pos[1];
     var w=this.render.text.length*30;
     var h=30;
-    if(stg_events.click && this.selectable){
-        for(var i=0;i<stg_events.click.length;i++){
-            if(stg_events.click[i]){
-                var cx=stg_events.click[i][0];
-                var cy=stg_events.click[i][1];
+    var q=this.event_type?stg_system_events:stg_events;
+    if(q.click && this.selectable){
+        for(var i=0;i<q.click.length;i++){
+            if(q.click[i]){
+                var cx=q.click[i][0];
+                var cy=q.click[i][1];
                 if(cx>x && cx<x+w && cy>y && cy<y+h){
                     if(this.menu){
                         this.menu.selectfunction(this);
@@ -320,5 +323,14 @@ BossLifeBar.prototype.init=function(){
 
 };
 
-
+function IsPC()
+{
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
+    }
+    return flag;
+}
 

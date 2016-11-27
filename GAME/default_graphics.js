@@ -50,6 +50,12 @@ var ifeSpriteShader={
             _gl.disable(_gl.DEPTH_TEST);
             _gl.bindFramebuffer(_gl.FRAMEBUFFER, tgt.buffer||null);
             _gl.viewport(0,0,tgt.width,tgt.height);
+
+
+            _gl.enable(_gl.BLEND);
+            _gl.blendEquation(_gl.FUNC_ADD);
+            _gl.blendFunc(_gl.ONE,_gl.ONE_MINUS_SRC_ALPHA);
+
             if(!this.glset){
                 webglCompileShader(this);
                 _webGlUniformInput(this,"uWindow",webgl2DMatrix(pro.o_width,pro.o_height));
@@ -158,8 +164,9 @@ var ifeSpriteShader={
                                 var obj = pool[l][tn][i];
                                 c.globalAlpha=obj.alpha;
                                 c.setTransform(sx, 0, 0, sy, obj.cx*sx, obj.cy*sy);
+
                                 c.rotate(obj.r);
-                                c.drawImage(tex, obj.uvt[0], obj.uvt[1], obj.uvt[2], obj.uvt[3], obj.cmx, obj.cmy, obj.uvt[2], obj.uvt[3]);
+                                c.drawImage(tex, obj.uvt[0], obj.uvt[1], obj.uvt[2], obj.uvt[3], obj.cmx*obj.scale[0], obj.cmy*obj.scale[1], obj.uvt[2]*obj.scale[0], obj.uvt[3]*obj.scale[1]);
                             }
                         }
                     }
@@ -204,8 +211,8 @@ var ifeSpriteShader={
         "varying vec4 vColor;" +
         "void main(void){" +
         "vec4 smpColor = texture2D(texture, vTexture);" +
-        "gl_FragColor  = vColor * smpColor;" +
-        //"gl_FragColor  = vColor;" +
+       // "gl_FragColor  = vColor[3] * smpColor * vec4(vColor[0],vColor[1],vColor[2],1.0);" +
+        "gl_FragColor  = vec4(vColor[0],vColor[1],vColor[2],1.0)*vec4(smpColor[0],smpColor[1],smpColor[2],1.0)*smpColor[3]*vColor[3];" +
         "}",
     input:{
         aPosition:[0,2,null,0,1,0],

@@ -13,6 +13,7 @@ ife_loader.init=function(){
     if(!this.loaded){
         //初始化环境
         this.loaded=1;
+        //stg_refresher_type=1;
         stgLoadKeyMap();//初始化按键表
         bullet00Assignment();//初始化子弹文理绑定
         //载入音效
@@ -31,7 +32,7 @@ ife_loader.init=function(){
         stg_frame_w=480;
         stg_frame_h=550;
 
-        stg_refresher_type=0;
+        if(IsPC())stg_refresher_type=0;
         var p=stgLoadData("render_type");
         //p=1;
         stgCreateCanvas("frame",stg_frame_w,stg_frame_h,p?stg_const.TEX_CANVAS2D:stg_const.TEX_CANVAS3D);
@@ -94,7 +95,11 @@ ife_loader.init=function(){
 
 
     ife.logo=new RenderText(20,580);
-    ife.logo.render.text="JavaSTaGe v0.3.0 内部版本  Exbo 2016/4/15";
+    if(IsPC() && !window.chrome){
+        ife.logo.render.text="JavaSTaGe v0.3.0 建议使用Chrome浏览器";
+    }else{
+        ife.logo.render.text="JavaSTaGe v0.3.0 内部版本  Exbo 2016/4/15";
+    }
     ife.logo.render.color="#000";
     stgAddObject(ife.resolution);
     stgAddObject(ife.main_menu);
@@ -104,11 +109,22 @@ ife_loader.init=function(){
         ife.main_menu.setColor("#88F","#880");
     }
     stgClearCanvas("ui");
-    stgDeleteSelf();
+    //stgDeleteSelf();
+    ife.avoid_refresh();
+};
+ife_loader.script=function(){
+    if(ife.main_menu.active) {
+        var t = checkKeyChange();
+        if (t.length) {
+            if (t[0] == 82) {
+                stgResetKeyMap();
+            }
+        }
+    }
 };
 
 
-
-ife.startGame=function(level,player){
-    stgStartLevel(level,[player],{});
+ife.startGame=function(level,player,commondata){
+    stgStartLevel(level,[player],commondata||{});
 };
+

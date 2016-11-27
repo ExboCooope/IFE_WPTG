@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="height: 100%">
+<html style="height: 100%;background-color: #000">
 <head lang="en">
     <meta charset="UTF-8">
     <style type="text/css">
@@ -29,9 +29,6 @@
     <script src="GAME/default_multiplayer_script.js"></script>
     <script src="GAME/default_ui.js"></script>
     <script src="GAME/default_3d_shader.js"></script>
-    <script src="GAME/stageA1.js"></script>
-    <script src="GAME/stagePressureTest.js"></script>
-    <script src="GAME/stagePressureTest2.js"></script>
     <script src="GAME/Enemy01.js"></script>
     <script src="GAME/default_item_script.js"></script>
     <script src="res/resource_holder.js"></script>
@@ -42,7 +39,9 @@
     <script src="GAME/IFE/ife_pressure_test.js"></script>
     <script src="GAME/IFE/ife_blocker.js"></script>
     <script src="GAME/IFE/ife_stage1.js"></script>
+    <script src="GAME/IFE/ife_stage2.js"></script>
     <script src="GAME/IFE/ife_pathfinding.js"></script>
+    <script src="GAME/IFE/stage_avoid_test.js"></script>
     <input class="rpy" id="1" type="file" />
 <script>
     stg_menu_script=ife_loader;
@@ -52,7 +51,8 @@
     q.onchange=function(){
         upload(this.files[0]);
         ife.item_playreplay.selectable=1;
-    }
+        ife.main_menu.setColor("#88F","#880");
+    };
 
     HTMLElement.prototype.setStatic=function(){
         this.addEventListener("selectstart",HTMLElement.preventSelectFunction,true);

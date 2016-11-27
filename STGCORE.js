@@ -202,11 +202,12 @@ function StgObject(){
 
 function stgApplyEnemy(e){
     e.on_hit_by=default_enemy_onhitby;
+    e.type=stg_const.OBJ_ENEMY;
     return e;
 }
 
 function default_enemy_onhitby(bullet){
-    stg_target.life-=bullet.damage*(1-(stg_target.shot_resistance||0));
+    if(bullet.damage)stg_target.life-=bullet.damage*(1-(stg_target.shot_resistance||0));
 }
 
 function StgRender(sShaderName){
@@ -641,6 +642,7 @@ function _stgMainLoop_PlayerState(){
 function _stgMainLoop_Engine(){
     _hit_by_pool=[];
     _hit_pool=[];
+    stg_enemy=[];
     var i;
     var a;
     if(stg_game_state==stg_const.GAME_RUNNING) {
@@ -819,6 +821,10 @@ function _stgMainLoop_Engine(){
                         stgDeleteObject(a);
                     }
                 }
+            }
+
+            if(a.type==stg_const.OBJ_ENEMY){
+                stg_enemy.push(a);
             }
         }
     }
